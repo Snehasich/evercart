@@ -40,7 +40,7 @@ function Main() {
             className="fa-solid fa-magnifying-glass sch" 
             onClick={handleSearch} 
             style={{ cursor: "pointer" }}
-          ></i>
+           />
           <input
             className="search"
             type="text"

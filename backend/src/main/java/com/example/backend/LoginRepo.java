@@ -2,6 +2,9 @@ package com.example.backend;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import jakarta.transaction.Transactional;
+
 import java.util.Optional;
 
 @Repository
@@ -12,4 +15,7 @@ public interface LoginRepo extends JpaRepository<LoginDetails, Long> {
 
     // Checks if a username already exists for registration
     boolean existsByUsername(String username); 
+
+    @Transactional // REQUIRED for methods that modify the database
+    void deleteByUsername(String username);
 }

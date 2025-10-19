@@ -15,12 +15,9 @@ public class LoginDetails {
 
     // Constructors 
     public LoginDetails() {}
-    public LoginDetails(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    // Getters and Setters (REQUIRED for JPA/JSON mapping)
+    // ... (rest of the constructors, getters, and setters are correct)
+    
+    // ...
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     

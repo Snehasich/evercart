@@ -21,29 +21,27 @@ function Login() {
     setLoading(true);
 
     try {
-      // POST request to Spring Boot login endpoint
       const response = await axios.post(`${API_BASE_URL}/login`, {
-        username: username,
-        password: password,
+        username,
+        password,
       });
 
-      // Assuming Spring Boot returns 200 OK and a success message
-      alert(`✅ ${response.data} Redirecting...`);
-      // In a real app, you would store the returned authentication token here
-      // localStorage.setItem("authToken", response.data.token); 
-      
-      window.location.href = "/"; 
+      // Store login state and username
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", username); // backend returns username
+
+      alert(`Login successful! Welcome, ${username}`);
+      window.location.href = "/"; // redirect to main page
 
     } catch (error) {
-      // Check for custom error message from the backend (e.g., 401 Unauthorized)
-      const message = error.response?.data || "Login failed due to network error.";
+      const message = error.response?.data || "Login failed!";
       alert(`❌ ${message}`);
-
     } finally {
       setLoading(false);
-      resetForm();
     }
   };
+
+
 
   // 🟣 Handle Sign-Up (API Call)
   const handleSignUp = async (e) => {

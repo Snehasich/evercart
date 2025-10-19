@@ -5,9 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class HelloController {
@@ -26,6 +30,27 @@ public class HelloController {
     public List<LoginDetails> fetchAllUsers() {
         return loginRepo.findAll();
     }
+
+    // ✅ Return currently logged-in user
+    @GetMapping("/api/auth/me")
+    public LoginDetails getCurrentUser(Principal principal) {
+        // principal.getName() returns the username of the authenticated user
+        return loginRepo.findByUsername(principal.getName())
+                .orElseThrow(() -> new IllegalStateException("User not found"));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDetails loginDetails) {
+        Optional<LoginDetails> user = loginRepo.findByUsername(loginDetails.getUsername());
+        
+        if (user.isPresent() && user.get().getPassword().equals(loginDetails.getPassword())) {
+            // Return username as a simple string
+            return ResponseEntity.ok(user.get().getUsername());
+        } else {
+            return ResponseEntity.status(401).body("Invalid username or password");
+        }
+    }
+
 
     @DeleteMapping("/delete/id/{myid}")
     public ResponseEntity<?> delete(@PathVariable Long myid) {

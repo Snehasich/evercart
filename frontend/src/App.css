@@ -227,7 +227,7 @@ body.dark-mode .dropdown_link:hover {
 .box {
   background-color: white;
   width: 200px;
-  height: 200px;
+  height: 220px;
   padding: 20px;
   border-radius: 30px;
   border : 1px solid black;
@@ -246,7 +246,7 @@ body.dark-mode .dropdown_link:hover {
 }
 
 .box img {
-  width: 120px;
+  width: 9vw;
 }
 
 .box h3, h4 {
@@ -257,4 +257,29 @@ body.dark-mode .dropdown_link:hover {
 
 .box h4 {
   margin-top: 0px;
+}
+
+
+/* Hover animation */
+.box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .boxes {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .box {
+    width: 70vw;
+    height: auto;
+  }
+
+  .box img {
+    width: 50vw;
+  }
 }

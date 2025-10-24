@@ -2,6 +2,8 @@ import logo from './logo.jpg';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import Items from './Items.jsx';
+
 function Main() {
   const [query, setQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -45,6 +47,32 @@ function Main() {
     setUsername("");
     navigate("/"); // redirect to home
   };
+
+
+
+  const mobile_tablet_details = [
+    {
+      name: "iPhone 15 Pro",
+      price: "₹1,34,900",
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false"
+    },
+    {
+      name: "Samsung Galaxy S24 Ultra",
+      price: "₹1,29,999",
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/j/m/z/-original-imahgfmxumntk7sy.jpeg?q=70&crop=false"
+    },
+    {
+      name: "iPad Air (M2)",
+      price: "₹59,900",
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70&crop=false"
+    },
+    {
+      name: "Samsung Galaxy Tab S9",
+      price: "₹72,999",
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/n/o/f/-original-imah69ytcerzgckb.jpeg?q=70&crop=false"
+    }
+  ];
+
 
   return (
     <div className="Main">
@@ -109,6 +137,15 @@ function Main() {
             {isDarkMode ? "Light Mode" : "Dark Mode"}
           </button>
         </div>
+      </div>
+
+      <div className="items_container">
+          <h1>Mobiles and Tablets</h1>
+          <div className="boxes">
+            {mobile_tablet_details.map(function(ele) {
+              return <Items name={ele.name} price={ele.price} img={ele.img}/>;
+            })}
+          </div>
       </div>
     </div>
   );

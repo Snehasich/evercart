@@ -1,83 +1,63 @@
 package com.example.backend;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class HelloController {
 
     private final LoginRepo loginRepo;
 
-    @Autowired
+    // Constructor
     public HelloController(LoginRepo loginRepo) {
         this.loginRepo = loginRepo;
     }
-    
+
+    // --- READ OPERATIONS ---
+
     @GetMapping("/get")
     public List<LoginDetails> getDetails() {
         return fetchAllUsers();
     }
-    public List<LoginDetails> fetchAllUsers() {
+
+    private List<LoginDetails> fetchAllUsers() {
         return loginRepo.findAll();
     }
 
-    // ✅ Return currently logged-in user
-    @GetMapping("/api/auth/me")
-    public LoginDetails getCurrentUser(Principal principal) {
-        // principal.getName() returns the username of the authenticated user
-        return loginRepo.findByUsername(principal.getName())
-                .orElseThrow(() -> new IllegalStateException("User not found"));
-    }
+    // NOTE: @GetMapping("/api/auth/me") IS REMOVED HERE
+    // NOTE: @PostMapping("/login") IS REMOVED HERE
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDetails loginDetails) {
-        Optional<LoginDetails> user = loginRepo.findByUsername(loginDetails.getUsername());
-        
-        if (user.isPresent() && user.get().getPassword().equals(loginDetails.getPassword())) {
-            // Return username as a simple string
-            return ResponseEntity.ok(user.get().getUsername());
-        } else {
-            return ResponseEntity.status(401).body("Invalid username or password");
-        }
-    }
-
+    // --- DELETE OPERATIONS ---
 
     @DeleteMapping("/delete/id/{myid}")
-    public ResponseEntity<?> delete(@PathVariable Long myid) {
+    public ResponseEntity<String> deleteById(@PathVariable Long myid) {
         deleteUserById(myid);
         return ResponseEntity.ok("User with id " + myid + " deleted successfully.");
     }
 
     @DeleteMapping("/delete/username/{username}")
-    public ResponseEntity<String> delete(@PathVariable String username) {
+    public ResponseEntity<String> deleteByUsername(@PathVariable String username) {
         deleteUserByName(username);
         return ResponseEntity.ok("User with username " + username + " deleted successfully.");
     }
 
-    public void deleteUserByName(String username) {
+    @Transactional
+    private void deleteUserByName(String username) {
         boolean exists = loginRepo.existsByUsername(username);
-        if(!exists) {
-            throw new IllegalStateException("User with username " + username + " does not exits");
+        if (!exists) {
+            throw new IllegalStateException("User with username " + username + " does not exist");
         }
         loginRepo.deleteByUsername(username);
     }
 
-    public void deleteUserById(Long studentId) {
+    @Transactional
+    private void deleteUserById(Long studentId) {
         boolean exists = loginRepo.existsById(studentId);
-        if(!exists) {
-            throw new IllegalStateException("student with id " + studentId + " does not exits");
+        if (!exists) {
+            throw new IllegalStateException("Student with id " + studentId + " does not exist");
         }
         loginRepo.deleteById(studentId);
     }
-
 }

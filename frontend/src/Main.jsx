@@ -147,6 +147,96 @@ function Main() {
             })}
           </div>
       </div>
+
+       {/* ✅ Text-based Flipkart-style Footer */}
+      <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", lineHeight: "1.8" }}>
+          
+          <div>
+            <h4>ABOUT</h4>
+            <p>Contact Us</p>
+            <p>About Us</p>
+            <p>Careers</p>
+            <p>Flipkart Stories</p>
+            <p>Press</p>
+            <p>Corporate Information</p>
+          </div>
+
+          <div>
+            <h4>GROUP COMPANIES</h4>
+            <p>Myntra</p>
+            <p>Cleartrip</p>
+            <p>Shopsy</p>
+          </div>
+
+          <div>
+            <h4>HELP</h4>
+            <p>Payments</p>
+            <p>Shipping</p>
+            <p>Cancellation & Returns</p>
+            <p>FAQ</p>
+          </div>
+
+          <div>
+            <h4>CONSUMER POLICY</h4>
+            <p>Cancellation & Returns</p>
+            <p>Terms Of Use</p>
+            <p>Security</p>
+            <p>Privacy</p>
+            <p>Sitemap</p>
+            <p>Grievance Redressal</p>
+            <p>EPR Compliance</p>
+          </div>
+
+          <div style={{ minWidth: "250px" }}>
+            <h4>Mail Us:</h4>
+            <p>Flipkart Internet Private Limited,<br/>
+            Buildings Alyssa, Begonia &<br/>
+            Clove Embassy Tech Village,<br/>
+            Outer Ring Road, Devarabeesanahalli Village,<br/>
+            Bengaluru, 560103, Karnataka, India</p>
+
+            <h4>Social:</h4>
+            <div style={{ fontSize: "20px", display: "flex", gap: "10px" }}>
+              <i className="fa-brands fa-x-twitter"></i>
+              <i className="fa-brands fa-facebook"></i>
+              <i className="fa-brands fa-youtube"></i>
+              <i className="fa-brands fa-instagram"></i>
+            </div>
+          </div>
+
+          <div style={{ minWidth: "250px" }}>
+            <h4>Registered Office Address:</h4>
+            <p>Flipkart Internet Private Limited,<br/>
+            Buildings Alyssa, Begonia &<br/>
+            Clove Embassy Tech Village,<br/>
+            Outer Ring Road, Devarabeesanahalli Village,<br/>
+            Bengaluru, 560103, Karnataka, India</p>
+            <p><strong>CIN:</strong> U51109KA2012PTC066107</p>
+            <p><strong>Telephone:</strong> 044-45614700 / 044-67415800</p>
+          </div>
+        </div>
+
+        <hr style={{ margin: "30px 0", borderColor: "#444" }} />
+
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "20px", fontSize: "14px" }}>
+            <p>Become a Seller</p>
+            <p>Advertise</p>
+            <p>Gift Cards</p>
+            <p>Help Center</p>
+          </div>
+          <p>© 2007–2025 Flipkart.com</p>
+          <div style={{ fontSize: "22px", display: "flex", gap: "10px" }}>
+            <i className="fa-brands fa-cc-visa"></i>
+            <i className="fa-brands fa-cc-mastercard"></i>
+            <i className="fa-brands fa-cc-amex"></i>
+            <i className="fa-brands fa-cc-discover"></i>
+            <i className="fa-brands fa-cc-paypal"></i>
+          </div>
+        </div>
+      </footer>
+      
     </div>
   );
 }

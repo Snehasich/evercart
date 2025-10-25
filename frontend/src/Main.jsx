@@ -1,7 +1,6 @@
 import logo from './logo.jpg';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import Items from './Items.jsx';
 
 function Main() {
@@ -52,26 +51,35 @@ function Main() {
 
   const mobile_tablet_details = [
     {
+      id: "iphone15pro",
       name: "iPhone 15 Pro",
       price: "₹1,34,900",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false"
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false",
+      prices: 134900
     },
     {
+      id: "s24ultra",
       name: "Samsung Galaxy S24 Ultra",
       price: "₹1,29,999",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/j/m/z/-original-imahgfmxumntk7sy.jpeg?q=70&crop=false"
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/j/m/z/-original-imahgfmxumntk7sy.jpeg?q=70&crop=false",
+      prices: 129999
     },
     {
+      id: "ipadairm2",
       name: "iPad Air (M2)",
       price: "₹59,900",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70&crop=false"
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70&crop=false",
+      prices: 59900
     },
     {
+      id: "tabs9",
       name: "Samsung Galaxy Tab S9",
       price: "₹72,999",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/n/o/f/-original-imah69ytcerzgckb.jpeg?q=70&crop=false"
+      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/n/o/f/-original-imah69ytcerzgckb.jpeg?q=70&crop=false",
+      prices: 72999
     }
   ];
+
 
 
   return (
@@ -143,10 +151,11 @@ function Main() {
           <h1>Mobiles and Tablets</h1>
           <div className="boxes">
             {mobile_tablet_details.map(function(ele) {
-              return <Items name={ele.name} price={ele.price} img={ele.img}/>;
+              return <Items key={ele.id} id={ele.id} prices={ele.prices} name={ele.name} price={ele.price} img={ele.img}/>;
             })}
           </div>
       </div>
+
 
        {/* ✅ Text-based Flipkart-style Footer */}
       <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>

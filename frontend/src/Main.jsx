@@ -156,8 +156,12 @@ function Main() {
           </div>
       </div>
 
+<<<<<<< HEAD
 
        {/* ✅ Text-based Flipkart-style Footer */}
+=======
+       {/* ✅ Text-based Footer */}
+>>>>>>> 62dd3260d3cd357a9c4c146943b0c880cdcb5e22
       <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", lineHeight: "1.8" }}>
           
@@ -166,7 +170,7 @@ function Main() {
             <p>Contact Us</p>
             <p>About Us</p>
             <p>Careers</p>
-            <p>Flipkart Stories</p>
+            <p>Evercart Stories</p>
             <p>Press</p>
             <p>Corporate Information</p>
           </div>
@@ -199,11 +203,11 @@ function Main() {
 
           <div style={{ minWidth: "250px" }}>
             <h4>Mail Us:</h4>
-            <p>Flipkart Internet Private Limited,<br/>
+            <p>Evercart Internet Private Limited,<br/>
             Buildings Alyssa, Begonia &<br/>
             Clove Embassy Tech Village,<br/>
             Outer Ring Road, Devarabeesanahalli Village,<br/>
-            Bengaluru, 560103, Karnataka, India</p>
+            Bengaluru, 560060, Karnataka, India</p>
 
             <h4>Social:</h4>
             <div style={{ fontSize: "20px", display: "flex", gap: "10px" }}>
@@ -216,13 +220,13 @@ function Main() {
 
           <div style={{ minWidth: "250px" }}>
             <h4>Registered Office Address:</h4>
-            <p>Flipkart Internet Private Limited,<br/>
+            <p>Evercart Internet Private Limited,<br/>
             Buildings Alyssa, Begonia &<br/>
             Clove Embassy Tech Village,<br/>
             Outer Ring Road, Devarabeesanahalli Village,<br/>
-            Bengaluru, 560103, Karnataka, India</p>
-            <p><strong>CIN:</strong> U51109KA2012PTC066107</p>
-            <p><strong>Telephone:</strong> 044-45614700 / 044-67415800</p>
+            Bengaluru, 560060, Karnataka, India</p>
+            <p><strong>CIN:</strong> U51109KA2012PTC066105</p>
+            <p><strong>Telephone:</strong> 9798021232 / 7019836687</p>
           </div>
         </div>
 
@@ -235,7 +239,7 @@ function Main() {
             <p>Gift Cards</p>
             <p>Help Center</p>
           </div>
-          <p>© 2007–2025 Flipkart.com</p>
+          <p>© 2025–2026 Evercart.com</p>
           <div style={{ fontSize: "22px", display: "flex", gap: "10px" }}>
             <i className="fa-brands fa-cc-visa"></i>
             <i className="fa-brands fa-cc-mastercard"></i>

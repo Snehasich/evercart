@@ -3,6 +3,12 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Items from './Items.jsx';
 
+import iphone15proImg from './assets/iPhone 15 Pro.webp';
+import s24ultraImg from './assets/Samsung Galaxy S24 Ultra.webp';
+import ipadairm2Img from './assets/iPad Air (M2).webp';
+import tabs9Img from './assets/Samsung Galaxy Tab S9.webp';
+
+
 function Main() {
   const [query, setQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -54,28 +60,28 @@ function Main() {
       id: "iphone15pro",
       name: "iPhone 15 Pro",
       price: "₹1,34,900",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false",
+      img: iphone15proImg,
       prices: 134900
     },
     {
       id: "s24ultra",
       name: "Samsung Galaxy S24 Ultra",
       price: "₹1,29,999",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/j/m/z/-original-imahgfmxumntk7sy.jpeg?q=70&crop=false",
+      img: s24ultraImg,
       prices: 129999
     },
     {
       id: "ipadairm2",
       name: "iPad Air (M2)",
       price: "₹59,900",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70&crop=false",
+      img: ipadairm2Img,
       prices: 59900
     },
     {
       id: "tabs9",
       name: "Samsung Galaxy Tab S9",
       price: "₹72,999",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/tablet/n/o/f/-original-imah69ytcerzgckb.jpeg?q=70&crop=false",
+      img: tabs9Img,
       prices: 72999
     }
   ];
@@ -156,12 +162,8 @@ function Main() {
           </div>
       </div>
 
-<<<<<<< HEAD
 
        {/* ✅ Text-based Flipkart-style Footer */}
-=======
-       {/* ✅ Text-based Footer */}
->>>>>>> 62dd3260d3cd357a9c4c146943b0c880cdcb5e22
       <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", lineHeight: "1.8" }}>
           

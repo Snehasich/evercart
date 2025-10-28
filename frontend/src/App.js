@@ -13,9 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/cart" element={<Cart username={loggedInUsername} />} />
+        <Route path="/cart" element={<Cart />} />
         {/* ✅ FIXED: Renamed component tag */}
-        <Route path="/item/:id" element={<InsideItems username={loggedInUsername} />} />
+        <Route path="/item/:id" element={<InsideItems  />} />
       </Routes>
     </Router>
   );

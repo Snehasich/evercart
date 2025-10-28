@@ -53,7 +53,7 @@ function Main() {
     {
       id: "iphone15pro",
       name: "iPhone 15 Pro",
-      price: "₹1,34,900",
+      price: "₹1,00,000",
       img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false",
       prices: 134900
     },
@@ -79,6 +79,132 @@ function Main() {
       prices: 72999
     }
   ];
+
+//
+const laptop_details = [
+  {
+    id: "macbookairm2",
+    name: "MacBook Air M2",
+    price: "₹1,14,990",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/f/j/g/-original-imahfthtkkzyazkf.jpeg?q=70&crop=false",
+    prices: 114990
+  },
+  {
+    id: "legion5pro",
+    name: "Lenovo Legion 5 Pro",
+    price: "₹1,49,990",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/z/b/6/-original-imahfkh3ezughhh4.jpeg?q=70&crop=false",
+    prices: 149990
+  },
+  {
+    id: "vivobook15",
+    name: "ASUS Vivobook 15",
+    price: "₹49,990",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/m/q/v/-original-imahguacfehnaqvd.jpeg?q=70&crop=false",
+    prices: 49990
+  },
+  {
+    id: "hp15s",
+    name: "HP 15s Ryzen 5",
+    price: "₹46,990",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/f/o/u/omnibook-3-ngai-thin-and-light-laptop-hp-original-imahcxyrftbs73tg.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/computer/f/o/u/omnibook-3-ngai-thin-and-light-laptop-hp-original-imahcxyrftbs73tg.jpeg?q=70&crop=false 1x",
+    prices: 46990
+  }
+];
+
+const wearable_details = [
+  {
+    id: "applewatch9",
+    name: "Apple Watch Series 9",
+    price: "₹41,900",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/7/r/e/45-mr993hn-a-ios-apple-yes-original-imagterzzu4fsrqg.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/smartwatch/7/r/e/45-mr993hn-a-ios-apple-yes-original-imagterzzu4fsrqg.jpeg?q=70&crop=false 1x",
+    prices: 41900
+  },
+  {
+    id: "galaxywatch6",
+    name: "Samsung Galaxy Watch 6",
+    price: "₹29,999",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/z/e/e/-original-imahcn9f7grhgv8s.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/smartwatch/z/e/e/-original-imahcn9f7grhgv8s.jpeg?q=70&crop=false 1x",
+    prices: 29999
+  },
+  {
+    id: "noiseultra2",
+    name: "Noise ColorFit Ultra 2",
+    price: "₹2,999",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/e/g/x/35-306-wrb-sw-twistgo-std-blk-blk-android-ios-noise-yes-original-imah889zcdzvzcuf.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/smartwatch/e/g/x/35-306-wrb-sw-twistgo-std-blk-blk-android-ios-noise-yes-original-imah889zcdzvzcuf.jpeg?q=70&crop=false 1x",
+    prices: 2999
+  },
+  {
+    id: "boatxtend",
+    name: "boAt Xtend",
+    price: "₹1,599",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/screen-guard/screen-guard/8/d/u/xsfsg320-dasiana-original-imagpqx5kjhu6ngg.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/screen-guard/screen-guard/8/d/u/xsfsg320-dasiana-original-imagpqx5kjhu6ngg.jpeg?q=70&crop=false 1x",
+    prices: 1599
+  }
+];
+
+const audio_details = [
+  {
+    id: "airpodspro2",
+    name: "AirPods Pro 2",
+    price: "₹24,999",
+    img: "https://rukminim2.flixcart.com/image/612/612/xif0q/headphone/s/8/i/airpods-pro-2-2nd-generation-with-passive-noise-cancellation-original-imahf8fjbgaupcwp.jpeg?q=70",
+    prices: 24999
+  },
+  {
+    id: "sonywh1000xm5",
+    name: "Sony WH-1000XM5",
+    price: "₹29,990",
+    img: "https://rukminim2.flixcart.com/image/612/612/xif0q/headphone/v/d/g/-original-imahgr295uvptwq7.jpeg?q=70",
+    prices: 29990
+  },
+  {
+    id: "jbltune510",
+    name: "JBL Tune 510BT",
+    price: "₹3,499",
+    img: "https://rukminim2.flixcart.com/image/612/612/xif0q/speaker/z/n/y/-original-imagugvcse5hgn7b.jpeg?q=70",
+    prices: 3499
+  },
+  {
+    id: "boatairdopes181",
+    name: "boAt Airdopes 181",
+    price: "₹1,099",
+    img: "https://rukminim2.flixcart.com/image/612/612/xif0q/headphone/y/a/f/-original-imahcbyzzq3w6y4f.jpeg?q=70",
+    prices: 1099
+  }
+];
+
+const appliance_details = [
+  {
+    id: "lgfridge",
+    name: "LG 260L Refrigerator",
+    price: "₹24,490",
+    img: "https://rukminim2.flixcart.com/image/312/312/k7nnrm80/refrigerator-new/6/z/f/gl-s292rdsy-2-lg-original-imafpujnvxhpqws3.jpeg?q=70",
+    prices: 24490,
+     style: { width: "5px", height: "20px" }
+  },
+  {
+    id: "samsung7kg",
+    name: "Samsung 7kg Washing Machine",
+    price: "₹17,990",
+    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/6/c/l/-original-imahgy77tuby8m3q.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/washing-machine-new/6/c/l/-original-imahgy77tuby8m3q.jpeg?q=70&crop=false 1x",
+    prices: 17990
+  },
+  {
+    id: "dysonv8",
+    name: "Dyson V8 Vacuum Cleaner",
+    price: "₹28,900",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/vacuum-cleaner/j/k/y/-original-imagzuhvtnedeyxn.jpeg?q=70",
+    prices: 28900
+  },
+  {
+    id: "philipsairfryer",
+    name: "Philips Air Fryer",
+    price: "₹8,999",
+    img: "https://rukminim2.flixcart.com/image/612/612/xif0q/air-fryer/y/n/y/black-4-2-1500-na120-00-philips-original-imahf3xdcpgtmzb8.jpeg?q=70",
+    prices: 8999
+  }
+];
 
 
 
@@ -156,12 +282,47 @@ function Main() {
           </div>
       </div>
 
-<<<<<<< HEAD
+      <div className="items_container">
+          <h1>Laptops</h1>
+          <div className="boxes">
+            {laptop_details.map(function(ele) {
+              return <Items key={ele.id} id={ele.id} prices={ele.prices} name={ele.name} price={ele.price} img={ele.img}/>;
+            })}
+          </div>
+      </div>
 
-       {/* ✅ Text-based Flipkart-style Footer */}
-=======
+      <div className="items_container">
+          <h1>Smartwatches</h1>
+          <div className="boxes">
+            {wearable_details.map(function(ele) {
+              return <Items key={ele.id} id={ele.id} prices={ele.prices} name={ele.name} price={ele.price} img={ele.img}/>;
+            })}
+          </div>
+      </div>
+
+      <div className="items_container">
+          <h1>Audio Products</h1>
+          <div className="boxes">
+            {audio_details.map(function(ele) {
+              return <Items key={ele.id} id={ele.id} prices={ele.prices} name={ele.name} price={ele.price} img={ele.img}/>;
+            })}
+          </div>
+      </div>
+
+      <div className="items_container">
+          <h1>Smart-Home Devices</h1>
+          <div className="boxes">
+            {appliance_details.map(function(ele) {
+              return <Items key={ele.id} id={ele.id} prices={ele.prices} name={ele.name} price={ele.price} img={ele.img}/>;
+            })}
+          </div>
+      </div>
+
+
+
+
+
        {/* ✅ Text-based Footer */}
->>>>>>> 62dd3260d3cd357a9c4c146943b0c880cdcb5e22
       <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", lineHeight: "1.8" }}>
           

@@ -13,14 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
-<<<<<<< HEAD
         <Route path="/cart" element={<Cart />} />
         {/* ✅ FIXED: Renamed component tag */}
         <Route path="/item/:id" element={<InsideItems  />} />
-=======
-        <Route path="/cart" element={<Cart username={loggedInUsername} />} />
-        <Route path="/item/:id" element={<InsideItems username={loggedInUsername} />} />
->>>>>>> 573beaee76c12a6c37af75053cfb49b2ea718e76
       </Routes>
     </Router>
   );

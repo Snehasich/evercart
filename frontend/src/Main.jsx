@@ -3,11 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Items from './Items.jsx';
 
-import iphone15proImg from './assets/iPhone 15 Pro.webp';
-import s24ultraImg from './assets/Samsung Galaxy S24 Ultra.webp';
-import ipadairm2Img from './assets/iPad Air (M2).webp';
-import tabs9Img from './assets/Samsung Galaxy Tab S9.webp';
-
 
 function Main() {
   const [query, setQuery] = useState("");
@@ -61,27 +56,27 @@ function Main() {
       name: "iPhone 15 Pro",
       price: "₹1,00,000",
       img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false",
-      prices: 134900
+      prices: 100000
     },
     {
       id: "s24ultra",
       name: "Samsung Galaxy S24 Ultra",
       price: "₹1,29,999",
-      img: s24ultraImg,
+      img: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/i/b/d/-original-imahfz2tuqdczpfg.jpeg?q=70",
       prices: 129999
     },
     {
       id: "ipadairm2",
       name: "iPad Air (M2)",
       price: "₹59,900",
-      img: ipadairm2Img,
+      img: "https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70",
       prices: 59900
     },
     {
       id: "tabs9",
       name: "Samsung Galaxy Tab S9",
       price: "₹72,999",
-      img: tabs9Img,
+      img: "https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/t/l/y/-original-imahfdyf6hghuvmn.jpeg?q=70",
       prices: 72999
     }
   ];
@@ -185,22 +180,22 @@ const appliance_details = [
     id: "lgfridge",
     name: "LG 260L Refrigerator",
     price: "₹24,490",
-    img: "https://rukminim2.flixcart.com/image/312/312/k7nnrm80/refrigerator-new/6/z/f/gl-s292rdsy-2-lg-original-imafpujnvxhpqws3.jpeg?q=70",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/refrigerator-new/5/w/1/mr60-gb-51-2-2023-16-blue-star-47-44-5-original-imah76cgrdkhghta.jpeg?q=70",
     prices: 24490,
-     style: { width: "5px", height: "20px" }
+    style: { width: "1px", height: "2px" }
   },
   {
     id: "samsung7kg",
-    name: "Samsung 7kg Washing Machine",
+    name: "7kg Washing Machine",
     price: "₹17,990",
-    img: "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/6/c/l/-original-imahgy77tuby8m3q.jpeg?q=70&crop=false 2x, https://rukminim2.flixcart.com/image/416/416/xif0q/washing-machine-new/6/c/l/-original-imahgy77tuby8m3q.jpeg?q=70&crop=false 1x",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/washing-machine-new/x/l/h/-original-imahdz3vpycbsptd.jpeg?q=70",
     prices: 17990
   },
   {
     id: "dysonv8",
     name: "Dyson V8 Vacuum Cleaner",
     price: "₹28,900",
-    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/vacuum-cleaner/j/k/y/-original-imagzuhvtnedeyxn.jpeg?q=70",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/vacuum-cleaner/c/t/d/-original-imagzjdp6zg37ywu.jpeg?q=70",
     prices: 28900
   },
   {

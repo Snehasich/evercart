@@ -50,36 +50,36 @@ function Main() {
 
 
 
-  const mobile_tablet_details = [
-    {
-      id: "iphone15pro",
-      name: "iPhone 15 Pro",
-      price: "₹1,00,000",
-      img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false",
-      prices: 100000
-    },
-    {
-      id: "s24ultra",
-      name: "Samsung Galaxy S24 Ultra",
-      price: "₹1,29,999",
-      img: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/i/b/d/-original-imahfz2tuqdczpfg.jpeg?q=70",
-      prices: 129999
-    },
-    {
-      id: "ipadairm2",
-      name: "iPad Air (M2)",
-      price: "₹59,900",
-      img: "https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70",
-      prices: 59900
-    },
-    {
-      id: "tabs9",
-      name: "Samsung Galaxy Tab S9",
-      price: "₹72,999",
-      img: "https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/t/l/y/-original-imahfdyf6hghuvmn.jpeg?q=70",
-      prices: 72999
-    }
-  ];
+const mobile_tablet_details = [
+  {
+    id: "iphone15pro",
+    name: "iPhone 15 Pro",
+    price: "₹1,00,000",
+    img: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=70&crop=false",
+    prices: 100000
+  },
+  {
+    id: "s24ultra",
+    name: "Samsung Galaxy S24 Ultra",
+    price: "₹1,29,999",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/j/m/z/-original-imahgfmxumntk7sy.jpeg?q=70",
+    prices: 129999
+  },
+  {
+    id: "ipadairm2",
+    name: "iPad Air (M2)",
+    price: "₹59,900",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/w/p/r/-original-imahyp6gugx6vzqn.jpeg?q=70",
+    prices: 59900
+  },
+  {
+    id: "tabs9",
+    name: "Samsung Galaxy Tab S9",
+    price: "₹72,999",
+    img: "https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/n/o/f/-original-imah69ytcerzgckb.jpeg?q=70",
+    prices: 72999
+  }
+];
 
 //
 const laptop_details = [

@@ -220,8 +220,11 @@ body.dark-mode .dropdown_link:hover {
 
 .items_container {
   margin-top: 20px;
-  background-color: #de3535;
+  background-color: hsla(0, 44%, 34%, 0.185);
   height: 350px;
+  box-shadow:
+    0 0 8px rgba(0,0,0,0.35),
+    0 0 20px rgba(0,0,0,0.2);
 }
 
 .box {

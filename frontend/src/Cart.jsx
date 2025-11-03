@@ -49,8 +49,6 @@ const Cart = () => {
 
   const handleBuyNow = () => {
     alert("Proceeding to checkout...");
-    // You can navigate to a checkout page here using React Router:
-    // navigate("/checkout");
   };
 
   if (cartItems.length === 0)
@@ -91,30 +89,18 @@ const Cart = () => {
 
       <h3 className="cart-total">Total: ₹{totalPrice.toLocaleString()}</h3>
 
-      {/* Centered, Vibrant Buy Button */}
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+      {/* Buy Now button styled like Total Price */}
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
         <button
           onClick={handleBuyNow}
           style={{
-            width: "50%", // matches cart width visually
-            background: "linear-gradient(90deg, #ff5722, #ff9800)", // vibrant orange gradient
-            color: "white",
-            padding: "12px 0",
+            background: "none",
             border: "none",
-            borderRadius: "8px",
-            fontSize: "18px",
+            color: "black",
+            fontSize: "1.2rem",
             fontWeight: "bold",
             cursor: "pointer",
-            boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-            transition: "transform 0.2s ease, box-shadow 0.2s ease",
-          }}
-          onMouseOver={(e) => {
-            e.target.style.transform = "scale(1.05)";
-            e.target.style.boxShadow = "0px 6px 12px rgba(0,0,0,0.3)";
-          }}
-          onMouseOut={(e) => {
-            e.target.style.transform = "scale(1)";
-            e.target.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.2)";
+            padding: "0",
           }}
         >
           Buy Now

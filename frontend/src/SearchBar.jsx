@@ -1,85 +1,79 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ products }) => {
+function SearchBar({ products }) {
   const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
 
     if (value.trim() === "") {
-      setSuggestions([]);
-      return;
+      setFiltered([]);
+    } else {
+      const results = products.filter((item) =>
+        item.name.toLowerCase().includes(value)
+      );
+      setFiltered(results);
     }
-
-    // Filter products that include the search text
-    const filtered = products.filter((item) =>
-      item.name.toLowerCase().includes(value)
-    );
-
-    setSuggestions(filtered.slice(0, 5)); // show max 5 suggestions
   };
 
-  const handleSelect = (product) => {
-    setQuery(product.name);
-    setSuggestions([]);
-    navigate(`/product/${product.id}`); // navigate to product page
+  const handleSelect = (item) => {
+    setQuery(item.name);
+    setFiltered([]);
+    navigate(`/product/${item.id}`);
   };
 
-  const handleSearch = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const matched = products.find(
-      (p) => p.name.toLowerCase() === query.toLowerCase()
+    const match = products.find(
+      (item) => item.name.toLowerCase() === query.toLowerCase()
     );
-
-    if (matched) navigate(`/product/${matched.id}`);
-    else alert("No product found!");
+    if (match) navigate(`/product/${match.id}`);
+    else alert("Product not found in your store");
   };
 
   return (
-    <div style={{ position: "relative", width: "300px", margin: "auto" }}>
-      <form onSubmit={handleSearch}>
+    <div style={{ position: "relative" }}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search for products..."
           value={query}
-          onChange={handleChange}
+          onChange={handleSearch}
           style={{
             width: "100%",
             padding: "10px",
-            borderRadius: "20px",
+            borderRadius: "8px",
             border: "1px solid #ccc",
           }}
         />
       </form>
 
-      {suggestions.length > 0 && (
+      {filtered.length > 0 && (
         <ul
           style={{
-            position: "absolute",
-            top: "40px",
-            left: 0,
-            right: 0,
-            background: "white",
-            border: "1px solid #ccc",
-            borderRadius: "10px",
             listStyle: "none",
-            padding: "5px",
             margin: 0,
-            zIndex: 100,
+            padding: "5px",
+            position: "absolute",
+            width: "100%",
+            background: "white",
+            color: "black",
+            borderRadius: "8px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+            zIndex: 10,
           }}
         >
-          {suggestions.map((item) => (
+          {filtered.map((item) => (
             <li
               key={item.id}
               onClick={() => handleSelect(item)}
               style={{
                 padding: "8px",
                 cursor: "pointer",
-                borderBottom: "1px solid #eee",
               }}
             >
               {item.name}
@@ -89,6 +83,6 @@ const SearchBar = ({ products }) => {
       )}
     </div>
   );
-};
+}
 
 export default SearchBar;

@@ -10,7 +10,7 @@ function Main() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  // ✅ Combine all products into a single list for SearchBar
+  // ✅ Product list for SearchBar suggestions
   const allProducts = [
     { id: "iphone15pro", name: "iPhone 15 Pro" },
     { id: "s24ultra", name: "Samsung Galaxy S24 Ultra" },
@@ -64,23 +64,24 @@ function Main() {
   };
 
   // ✅ Product category data (unchanged)
-  const mobile_tablet_details = [ /* your full mobile_tablet_details here */ ];
-  const laptop_details = [ /* your full laptop_details here */ ];
-  const wearable_details = [ /* your full wearable_details here */ ];
-  const audio_details = [ /* your full audio_details here */ ];
-  const appliance_details = [ /* your full appliance_details here */ ];
+  const mobile_tablet_details = [ /* your mobile_tablet_details */ ];
+  const laptop_details = [ /* your laptop_details */ ];
+  const wearable_details = [ /* your wearable_details */ ];
+  const audio_details = [ /* your audio_details */ ];
+  const appliance_details = [ /* your appliance_details */ ];
 
   return (
     <div className="Main">
+      {/* ---------- HEADER ---------- */}
       <div className="header">
         <img src={logo} alt="Evercart Logo" className="logo" />
 
-        {/* ✅ Replaced Flipkart redirect bar with Smart SearchBar */}
+        {/* ✅ Smart Search Bar */}
         <div style={{ width: "40%", position: "relative" }}>
           <SearchBar products={allProducts} />
         </div>
 
-        {/* ✅ Login / Username Section */}
+        {/* ---------- LOGIN SECTION ---------- */}
         <div className="login_form">
           <i className="fa-regular fa-user"></i>
 
@@ -90,10 +91,15 @@ function Main() {
               <i className="fa-solid fa-angle-down up"></i>
               <div className="login_dropdown">
                 <p>Welcome back, {username}!</p>
-                <button 
+                <button
                   onClick={handleLogout}
                   className="dropdown_link"
-                  style={{ fontSize: "18px", background: "none", border: "none", cursor: "pointer" }}
+                  style={{
+                    fontSize: "18px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
                 >
                   <strong>Logout</strong>
                 </button>
@@ -113,11 +119,13 @@ function Main() {
           )}
         </div>
 
+        {/* ---------- CART SECTION ---------- */}
         <div className="cart_item">
           <i className="fa-solid fa-cart-shopping"></i>
           <Link to="/cart" className='head4 head'>Cart</Link>
         </div>
 
+        {/* ---------- DARK MODE TOGGLE ---------- */}
         <div className="mode">
           <button onClick={toggleMode} style={{ height: "40px" }}>
             {isDarkMode ? "Light Mode" : "Dark Mode"}
@@ -125,7 +133,7 @@ function Main() {
         </div>
       </div>
 
-      {/* ✅ Product Sections — untouched */}
+      {/* ---------- PRODUCT SECTIONS ---------- */}
       <div className="items_container">
         <h1>Mobiles and Tablets</h1>
         <div className="boxes">
@@ -171,9 +179,9 @@ function Main() {
         </div>
       </div>
 
-      {/* ✅ Footer (unchanged) */}
+      {/* ---------- FOOTER ---------- */}
       <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>
-        {/* keep your original footer here */}
+        {/* Your original footer content here */}
       </footer>
     </div>
   );

@@ -1,7 +1,6 @@
 import logo from './logo.jpg';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SearchBar from "./SearchBar";
 import Items from './Items.jsx';
 
 

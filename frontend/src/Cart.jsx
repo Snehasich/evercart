@@ -91,18 +91,30 @@ const Cart = () => {
 
       <h3 className="cart-total">Total: ₹{totalPrice.toLocaleString()}</h3>
 
-      {/* Centered Buy Button */}
+      {/* Centered, Vibrant Buy Button */}
       <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <button
           onClick={handleBuyNow}
           style={{
-            backgroundColor: "#28a745",
+            width: "50%", // matches cart width visually
+            background: "linear-gradient(90deg, #ff5722, #ff9800)", // vibrant orange gradient
             color: "white",
-            padding: "10px 30px",
+            padding: "12px 0",
             border: "none",
-            borderRadius: "5px",
-            fontSize: "16px",
+            borderRadius: "8px",
+            fontSize: "18px",
+            fontWeight: "bold",
             cursor: "pointer",
+            boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+            transition: "transform 0.2s ease, box-shadow 0.2s ease",
+          }}
+          onMouseOver={(e) => {
+            e.target.style.transform = "scale(1.05)";
+            e.target.style.boxShadow = "0px 6px 12px rgba(0,0,0,0.3)";
+          }}
+          onMouseOut={(e) => {
+            e.target.style.transform = "scale(1)";
+            e.target.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.2)";
           }}
         >
           Buy Now

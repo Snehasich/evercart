@@ -4,7 +4,7 @@ import { getCart, saveCart } from "./cartStorage";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const navigate = useNavigate(); // For navigation to checkout page
+  const navigate = useNavigate(); // ✅ For navigation to checkout page
 
   useEffect(() => {
     setCartItems(getCart());
@@ -45,8 +45,9 @@ const Cart = () => {
     0
   );
 
+  // ✅ This is where navigation to Checkout happens
   const handleBuyNow = () => {
-    navigate("/checkout"); // ✅ Navigate to Checkout page
+    navigate("/checkout"); 
   };
 
   if (cartItems.length === 0)
@@ -87,12 +88,12 @@ const Cart = () => {
         Total: ₹{totalPrice.toLocaleString()}
       </h3>
 
-      {/* ✅ Centered, Styled Buy Button */}
+      {/* ✅ Buy Now Button that navigates to /checkout */}
       <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
         <button
           onClick={handleBuyNow}
           style={{
-            backgroundColor: "#007bff", // Blue vibrant color
+            backgroundColor: "#007bff",
             color: "white",
             padding: "10px 40px",
             border: "none",

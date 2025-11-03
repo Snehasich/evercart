@@ -1,6 +1,7 @@
 import logo from './logo.jpg';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SearchBar from "./SearchBar";
 import Items from './Items.jsx';
 
 
@@ -26,7 +27,7 @@ function Main() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim() !== "") {
-      window.location.href = https://www.flipkart.com/search?q=${encodeURIComponent(query)};
+      window.location.href = 'https://www.flipkart.com/search?q=${encodeURIComponent(query)}';
       setQuery("");
     }
   };

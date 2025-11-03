@@ -10,29 +10,24 @@ function Main() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  // ✅ Combine all products into a single list for search suggestions
+  // ✅ Combine all products into a single list for SearchBar
   const allProducts = [
-    // Mobiles & Tablets
     { id: "iphone15pro", name: "iPhone 15 Pro" },
     { id: "s24ultra", name: "Samsung Galaxy S24 Ultra" },
     { id: "ipadairm2", name: "iPad Air (M2)" },
     { id: "tabs9", name: "Samsung Galaxy Tab S9" },
-    // Laptops
     { id: "macbookairm2", name: "MacBook Air M2" },
     { id: "legion5pro", name: "Lenovo Legion 5 Pro" },
     { id: "vivobook15", name: "ASUS Vivobook 15" },
     { id: "hp15s", name: "HP 15s Ryzen 5" },
-    // Smartwatches
     { id: "applewatch9", name: "Apple Watch Series 9" },
     { id: "galaxywatch6", name: "Samsung Galaxy Watch 6" },
     { id: "noiseultra2", name: "Noise ColorFit Ultra 2" },
     { id: "boatxtend", name: "boAt Xtend" },
-    // Audio
     { id: "airpodspro2", name: "AirPods Pro 2" },
     { id: "sonywh1000xm5", name: "Sony WH-1000XM5" },
     { id: "jbltune510", name: "JBL Tune 510BT" },
     { id: "boatairdopes181", name: "boAt Airdopes 181" },
-    // Appliances
     { id: "lgfridge", name: "LG 260L Refrigerator" },
     { id: "samsung7kg", name: "7kg Washing Machine" },
     { id: "dysonv8", name: "Dyson V8 Vacuum Cleaner" },
@@ -65,29 +60,30 @@ function Main() {
     localStorage.removeItem("username");
     setIsLoggedIn(false);
     setUsername("");
-    navigate("/"); // redirect to home
+    navigate("/");
   };
 
-  // ✅ Product categories (same as before)
-  const mobile_tablet_details = [ /* your mobile_tablet_details array here */ ];
-  const laptop_details = [ /* your laptop_details array here */ ];
-  const wearable_details = [ /* your wearable_details array here */ ];
-  const audio_details = [ /* your audio_details array here */ ];
-  const appliance_details = [ /* your appliance_details array here */ ];
+  // ✅ Product category data (unchanged)
+  const mobile_tablet_details = [ /* your full mobile_tablet_details here */ ];
+  const laptop_details = [ /* your full laptop_details here */ ];
+  const wearable_details = [ /* your full wearable_details here */ ];
+  const audio_details = [ /* your full audio_details here */ ];
+  const appliance_details = [ /* your full appliance_details here */ ];
 
   return (
     <div className="Main">
       <div className="header">
         <img src={logo} alt="Evercart Logo" className="logo" />
 
-        {/* ✅ Smart Search Bar Integration */}
-        <div className="search_bar" style={{ width: "40%", position: "relative" }}>
+        {/* ✅ Replaced Flipkart redirect bar with Smart SearchBar */}
+        <div style={{ width: "40%", position: "relative" }}>
           <SearchBar products={allProducts} />
         </div>
 
-        {/* Login / Username Section */}
+        {/* ✅ Login / Username Section */}
         <div className="login_form">
           <i className="fa-regular fa-user"></i>
+
           {isLoggedIn ? (
             <>
               <span className="head4 head">Hello</span>
@@ -95,8 +91,8 @@ function Main() {
               <div className="login_dropdown">
                 <p>Welcome back, {username}!</p>
                 <button 
-                  onClick={handleLogout} 
-                  className="dropdown_link" 
+                  onClick={handleLogout}
+                  className="dropdown_link"
                   style={{ fontSize: "18px", background: "none", border: "none", cursor: "pointer" }}
                 >
                   <strong>Logout</strong>
@@ -129,7 +125,7 @@ function Main() {
         </div>
       </div>
 
-      {/* ✅ Product Sections (same as before) */}
+      {/* ✅ Product Sections — untouched */}
       <div className="items_container">
         <h1>Mobiles and Tablets</h1>
         <div className="boxes">
@@ -177,7 +173,7 @@ function Main() {
 
       {/* ✅ Footer (unchanged) */}
       <footer style={{ background: "#212121", color: "#fff", padding: "40px 5%", marginTop: "60px" }}>
-        {/* your full footer code here */}
+        {/* keep your original footer here */}
       </footer>
     </div>
   );

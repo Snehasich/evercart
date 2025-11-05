@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Items from './Items.jsx';
 
-
 function Main() {
   const [query, setQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -26,10 +25,12 @@ function Main() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim() !== "") {
-      window.location.href = 'https://www.flipkart.com/search?q=${encodeURIComponent(query)}';
+      navigate(`/SearchBar?q=${encodeURIComponent(query)}`);
       setQuery("");
     }
   };
+
+
 
   const toggleMode = () => {
     setIsDarkMode(prev => {

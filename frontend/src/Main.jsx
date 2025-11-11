@@ -25,7 +25,8 @@ function Main() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim() !== "") {
-      navigate(`/SearchBar?q=${encodeURIComponent(query)}`);
+      // navigate and pass the search query + full product list via location.state
+      navigate("/SearchBar", { state: { q: query, products: allProducts } });
       setQuery("");
     }
   };
@@ -206,6 +207,16 @@ const appliance_details = [
     img: "https://rukminim2.flixcart.com/image/612/612/xif0q/air-fryer/y/n/y/black-4-2-1500-na120-00-philips-original-imahf3xdcpgtmzb8.jpeg?q=70",
     prices: 8999
   }
+];
+
+// add combined product list so SearchBar can search across all categories
+const allProducts = [
+  // flatten all category arrays into a single array
+  ...mobile_tablet_details,
+  ...laptop_details,
+  ...wearable_details,
+  ...audio_details,
+  ...appliance_details
 ];
 
 

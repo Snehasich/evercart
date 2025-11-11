@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Items from "./Items.jsx";
 
-const Navbar = () => {
 // ✅ Combine all product details in one place
 const allProducts = [
 // Mobiles & Tablets
@@ -138,84 +138,124 @@ img: "[https://rukminim2.flixcart.com/image/312/312/xif0q/tablet/n/o/f/-original
 
 ];
 
-const [query, setQuery] = useState("");
-const [filtered, setFiltered] = useState([]);
+const Navbar = ({ handleAddToCart }) => {
+  const location = useLocation();
+  // prefer products passed via navigation state, otherwise use bundled list
+  const passedProducts = location.state && location.state.products ? location.state.products : null;
+  const productList = passedProducts || allProducts;
 
-// 🔍 Search function
-const handleSearch = (e) => {
-const value = e.target.value.toLowerCase();
-setQuery(value);
+  const [query, setQuery] = useState("");
+  const [filtered, setFiltered] = useState([]);
 
+  // If Main navigated here with a query, perform initial search
+  useEffect(() => {
+    const initialQ = location.state && location.state.q ? String(location.state.q).trim() : "";
+    if (initialQ) {
+      setQuery(initialQ);
+      const qLower = initialQ.toLowerCase();
+      const results = productList.filter((item) =>
+        item.name.toLowerCase().includes(qLower)
+      );
+      setFiltered(results);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]); // re-run when route state changes
 
-if (value.trim() === "") {
-  setFiltered([]);
-} else {
-  const results = allProducts.filter((item) =>
-    item.name.toLowerCase().includes(value)
-  );
-  setFiltered(results);
-}
+  // live search on input change
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    const val = value.trim().toLowerCase();
+    if (val === "") {
+      setFiltered([]);
+    } else {
+      const results = productList.filter((item) =>
+        item.name.toLowerCase().includes(val)
+      );
+      setFiltered(results);
+    }
+  };
 
+  // support Enter as submit (keeps same behavior as typing)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const val = query.trim().toLowerCase();
+    if (val === "") {
+      setFiltered([]);
+      return;
+    }
+    const results = productList.filter((item) =>
+      item.name.toLowerCase().includes(val)
+    );
+    setFiltered(results);
+  };
 
-};
-
-return ( <div>
-<nav
-className="navbar"
-style={{
-background: "#222",
-color: "white",
-padding: "15px",
-display: "flex",
-justifyContent: "center",
-alignItems: "center",
-gap: "10px",
-}}
->
-<input
-type="text"
-placeholder="Search for products..."
-value={query}
-onChange={handleSearch}
-style={{
-width: "320px",
-padding: "10px",
-borderRadius: "6px",
-border: "1px solid #aaa",
-outline: "none",
-}}
-/> </nav>
-
-```
-  {/* 🧾 Show search results */}
-  {filtered.length > 0 && (
-    <div style={{ padding: "20px" }}>
-      <h3>Search Results:</h3>
-      <div
-        className="boxes"
+  return (
+    <div>
+      <nav
+        className="navbar"
         style={{
+          background: "#222",
+          color: "white",
+          padding: "15px",
           display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          marginTop: "15px",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "10px",
         }}
       >
-        {filtered.map((item) => (
-          <Items
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            price={item.price}
-            img={item.img}
+        <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <input
+            type="text"
+            placeholder="Search for products..."
+            value={query}
+            onChange={handleSearch}
+            style={{
+              width: "320px",
+              padding: "10px",
+              borderRadius: "6px",
+              border: "1px solid #aaa",
+              outline: "none",
+            }}
           />
-        ))}
-      </div>
+        </form>
+      </nav>
+
+      {/* 🧾 Show search results or "no results" when query is present */}
+      {query.trim() !== "" && (
+        <div style={{ padding: "20px" }}>
+          <h3>Search Results{filtered.length === 0 ? " — No results found" : ""}</h3>
+
+          {filtered.length > 0 ? (
+            <div
+              className="boxes"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "20px",
+                marginTop: "15px",
+              }}
+            >
+              {filtered.map((item) => (
+                <Items
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  price={item.price}
+                  img={item.img}
+                  prices={item.prices}
+                />
+              ))}
+            </div>
+          ) : (
+            <p style={{ marginTop: "12px", color: "#666" }}>
+              No products found for "{query}". Try different keywords.
+            </p>
+          )}
+        </div>
+      )}
     </div>
-  )}
-</div>
-
-
-);
+  );
 };
 
 export default Navbar;

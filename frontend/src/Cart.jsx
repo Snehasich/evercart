@@ -1,116 +1,170 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
-import { getCart, saveCart } from "./cartStorage";
+import React, { useState, useEffect } from "react"; // 1. Import useEffect
+import "./checkout.css";
+import { getCart, saveCart } from "./cartStorage"; // 2. Import your cart functions
 
-const Cart = () => {
+// 3. REMOVE `cartItems` from the props. It will get its own data.
+const Checkout = () => {
+  
+  // 4. Add state to HOLD the cart items, just like in Cart.jsx
   const [cartItems, setCartItems] = useState([]);
-  const navigate = useNavigate(); // ✅ For navigation to checkout page
 
+  // 5. Add useEffect to LOAD the cart items from localStorage on mount
   useEffect(() => {
     setCartItems(getCart());
   }, []);
 
-  const updateCart = (newCart) => {
-    saveCart(newCart);
-    setCartItems(newCart);
-  };
+  // This local state for the form is perfect. Keep it.
+  const [address, setAddress] = useState({
+    name: "",
+    phone: "",
+    street: "",
+    city: "",
+    pincode: "",
+  });
 
-  const handleRemove = (productId) => {
-    updateCart(cartItems.filter(item => item.productId !== productId));
-  };
+  const [paymentMethod, setPaymentMethod] = useState("COD");
 
-  const handleIncrease = (productId) => {
-    const updated = cartItems.map(item =>
-      item.productId === productId
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    );
-    updateCart(updated);
-  };
-
-  const handleDecrease = (productId) => {
-    const updated = cartItems
-      .map(item =>
-        item.productId === productId
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-      .filter(item => item.quantity > 0);
-    updateCart(updated);
-  };
-
+  // Helper function to clean price (copied from your Cart.jsx)
   const cleanPrice = (price) => Number(String(price).replace(/[^\d.-]/g, ""));
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + cleanPrice(item.price) * item.quantity,
+
+  // This `total` calculation will now work on the state loaded from localStorage
+  const total = cartItems.reduce(
+    (acc, item) => acc + cleanPrice(item.price) * item.quantity,
     0
   );
 
-  // ✅ This is where navigation to Checkout happens
-  const handleBuyNow = () => {
-    navigate("/checkout"); 
+  const handlePlaceOrder = () => {
+    if (
+      !address.name ||
+      !address.phone ||
+      !address.street ||
+      !address.city ||
+      !address.pincode
+    ) {
+      alert("Please fill all address details before placing the order.");
+      return;
+    }
+
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    alert(
+      `Order placed successfully!\nPayment Method: ${paymentMethod}\nTotal: ₹${total}`
+    );
+
+    // 6. (Recommended) Clear the cart from localStorage after a successful order
+    saveCart([]); // This clears the cart
+    setCartItems([]); // This updates the page to show an empty cart
+    // You might want to navigate to a "Thank You" page here
   };
 
-  if (cartItems.length === 0)
-    return <h2 className="cart-empty">Your Cart is Empty</h2>;
-
   return (
-    <div className="cart-container" style={{ color: "black" }}>
-      <h2 className="cart-title">Your Cart</h2>
+    <div className="checkout-container">
+      <h1>Checkout</h1>
 
-      {cartItems.map(item => (
-        <div key={item.productId} className="cart-item">
-          <img src={item.img} alt={item.name} className="cart-img" />
-          <div className="cart-details">
-            <p><strong>Name:</strong> {item.name}</p>
-            <p><strong>Price:</strong> ₹{cleanPrice(item.price)}</p>
+      {/* Cart Summary */}
+      <div className="checkout-section">
+        <h2>Order Summary</h2>
 
-            <div className="qty-section">
-              <span><strong>Quantity: </strong></span>
-              <button onClick={() => handleDecrease(item.productId)}>-</button>
-              <span className="qty-number">{item.quantity}</span>
-              <button onClick={() => handleIncrease(item.productId)}>+</button>
+        {/* This will now work perfectly */}
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          cartItems.map((item) => (
+            // Use item.productId to match your Cart.jsx
+            <div key={item.productId} className="checkout-item"> 
+              <div>
+                <h3>{item.name}</h3>
+                <p>Qty: {item.quantity}</p>
+              </div>
+              <p>₹{cleanPrice(item.price) * item.quantity}</p>
             </div>
-
-            <p><strong>Subtotal:</strong> ₹{cleanPrice(item.price) * item.quantity}</p>
-            <button className="remove-btn" onClick={() => handleRemove(item.productId)}>
-              Remove
-            </button>
-          </div>
-        </div>
-      ))}
-
-      <h3 className="cart-total" style={{
-        textAlign: "center",
-        fontSize: "1.3rem",
-        fontWeight: "bold",
-        marginTop: "20px",
-      }}>
-        Total: ₹{totalPrice.toLocaleString()}
-      </h3>
-
-      {/* ✅ Buy Now Button that navigates to /checkout */}
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
-        <button
-          onClick={handleBuyNow}
-          style={{
-            backgroundColor: "#007bff",
-            color: "white",
-            padding: "10px 40px",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "16px",
-            fontWeight: "bold",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease",
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = "#0056b3"}
-          onMouseOut={(e) => e.target.style.backgroundColor = "#007bff"}
-        >
-          Buy Now
-        </button>
+          ))
+        )}
+        
+        <hr />
+        <h3 className="total">Total: ₹{total}</h3>
       </div>
+
+      {/* Address Section (No changes needed) */}
+      <div className="checkout-section">
+        <h2>Delivery Address</h2>
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={address.name}
+          onChange={(e) => setAddress({ ...address, name: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={address.phone}
+          onChange={(e) => setAddress({ ...address, phone: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Street Address"
+          value={address.street}
+          onChange={(e) => setAddress({ ...address, street: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          value={address.city}
+          onChange={(e) => setAddress({ ...address, city: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Pincode"
+          value={address.pincode}
+          onChange={(e) => setAddress({ ...address, pincode: e.target.value })}
+        />
+      </div>
+
+      {/* Payment Section (No changes needed) */}
+      <div className="checkout-section">
+        {/* ...all your payment labels... */}
+        <h2>Payment Method</h2>
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="COD"
+            checked={paymentMethod === "COD"}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          />
+          Cash on Delivery
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="UPI"
+            checked={paymentMethod === "UPI"}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          />
+          UPI Payment
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="Card"
+            checked={paymentMethod === "Card"}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          />
+          Credit/Debit Card
+        </label>
+      </div>
+
+      {/* Place Order Button */}
+      <button className="place-order-btn" onClick={handlePlaceOrder}>
+        Place Order
+      </button>
     </div>
   );
 };
 
-export default Cart;
+export default Checkout;

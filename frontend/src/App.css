@@ -170,7 +170,6 @@ body.dark-mode .dropdown_link:hover {
 }
 
 
-
 .Login {
   margin-top: 100px;
   margin-left: 35%;
@@ -510,4 +509,19 @@ body.dark-mode .dropdown_link:hover {
 .items_container h1 {
   margin-bottom: 10px;
   margin-left: 30px;
+}
+
+
+
+
+.checkout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 33%;
+  width: 300px;
+  height: 50px;
+  background-color: #8f9c37;
+  margin-top: 90px;
+  border-radius: 10px;
 }

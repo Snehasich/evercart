@@ -78,12 +78,9 @@ function App() {
           path="/SearchBar" 
           element={<SearchResults handleAddToCart={handleAddToCart} cartCount={cartCount} />} 
         />
-        
-        <Route 
-          path="/timer" 
-          element={<Timer />} 
-        />
       </Routes>
+
+      <Timer />
     </Router>
   );
 }

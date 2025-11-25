@@ -24,7 +24,7 @@ const Timer = () => {
 
       if (diff <= 0) {
         // ✅ Timer expired
-        clearInterval(interval);
+        // clearInterval(interval);
         localStorage.removeItem("orderEndTime");
         setIsActive(false);
         setRemainingTime(0);

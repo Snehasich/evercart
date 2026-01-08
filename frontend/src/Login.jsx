@@ -1,38 +1,34 @@
-import React, { useState } from "react"; 
-import axios from "axios"; 
+import React, { useState } from "react";
+import axios from "axios";
 
-// The API base path defined in your Spring Boot AuthController
-const API_BASE_URL = "/api/auth"; 
+const API_BASE_URL = "/api/auth";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true); 
-  const [loading, setLoading] = useState(false); 
+  const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const resetForm = () => {
     setUsername("");
     setPassword("");
   };
 
-  // 🟢 Handle Login (API Call)
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/login`, {
+      await axios.post(`${API_BASE_URL}/login`, {
         username,
         password,
       });
 
-      // Store login state and username
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("username", username); // backend returns username
+      localStorage.setItem("username", username);
 
       alert(`Login successful! Welcome, ${username}`);
-      window.location.href = "/"; // redirect to main page
-
+      window.location.href = "/";
     } catch (error) {
       const message = error.response?.data || "Login failed!";
       alert(`❌ ${message}`);
@@ -41,134 +37,149 @@ function Login() {
     }
   };
 
-
-
-  // 🟣 Handle Sign-Up (API Call)
   const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // POST request to Spring Boot registration endpoint
       const response = await axios.post(`${API_BASE_URL}/register`, {
-        username: username,
-        password: password,
+        username,
+        password,
       });
 
-      // Assuming Spring Boot returns 201 CREATED and a success message
       alert(`🎉 ${response.data} Please log in now.`);
-      
       resetForm();
-      setIsLogin(true); // switch back to login view
-
+      setIsLogin(true);
     } catch (error) {
-      // Handle server response errors (e.g., 409 Conflict for username already taken)
-      const message = error.response?.data || "Registration failed. Try again!";
+      const message =
+        error.response?.data || "Registration failed. Try again!";
       alert(`⚠️ ${message}`);
-      
     } finally {
       setLoading(false);
     }
   };
 
-  // ================== UI ==================
   return (
-    <div className="Login">
-      {isLogin ? (
-        // ---------------- LOGIN FORM ----------------
-        <form className="login-all" onSubmit={handleLogin}>
-          <h1>Login</h1>
+    <div className="min-h-screen flex justify-center items-start pt-24 bg-white dark:bg-[#121212]">
+      <div className="w-[400px] h-[350px] bg-[#999e98]
+        rounded-[50px] flex flex-col justify-center">
 
-          <div className="username">
-            <h4>Username</h4>
-            <input
-              type="text"
-              placeholder="Enter your username"
-              className="u log"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
+        {isLogin ? (
+          /* ---------------- LOGIN ---------------- */
+          <form
+            onSubmit={handleLogin}
+            className="flex flex-col items-center justify-evenly h-full p-4"
+          >
+            <h1 className="text-2xl font-bold">Login</h1>
 
-          <div className="password">
-            <h4>Password</h4>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="p log"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+            <div className="flex items-center gap-3">
+              <h4 className="font-medium">Username</h4>
+              <input
+                type="text"
+                placeholder="Enter your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="h-[30px] rounded-xl px-3 outline-none"
+              />
+            </div>
 
-          <button type="submit" className="submit" disabled={loading}>
-            {loading ? 'Logging In...' : 'Login'} {/* Disable button during API call */}
-          </button>
-          
-          <p>
-            Don’t have an account?{" "}
-            <a
-              href="#!" // CORRECTED: Fixes accessibility warning
-              onClick={(e) => {
-                e.preventDefault(); // Prevent default anchor navigation
-                setIsLogin(false);
-                resetForm();
-              }}
+            <div className="flex items-center gap-3">
+              <h4 className="font-medium">Password</h4>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="h-[30px] rounded-xl px-3 outline-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-6 w-[100px] h-[30px] rounded-xl
+                bg-white hover:bg-primary hover:text-white
+                transition disabled:opacity-60"
             >
-              Sign Up
-            </a>
-          </p>
-        </form>
-      ) : (
-        // ---------------- SIGN-UP FORM ----------------
-        <form className="login-all" onSubmit={handleSignUp}>
-          <h1>Sign Up</h1>
+              {loading ? "Logging In..." : "Login"}
+            </button>
 
-          <div className="username">
-            <h4>Username</h4>
-            <input
-              type="text"
-              placeholder="Create username"
-              className="u log"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
+            <p className="text-sm">
+              Don’t have an account?{" "}
+              <a
+                href="#!"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsLogin(false);
+                  resetForm();
+                }}
+                className="text-blue-700 hover:underline"
+              >
+                Sign Up
+              </a>
+            </p>
+          </form>
+        ) : (
+          /* ---------------- SIGN UP ---------------- */
+          <form
+            onSubmit={handleSignUp}
+            className="flex flex-col items-center justify-evenly h-full p-4"
+          >
+            <h1 className="text-2xl font-bold">Sign Up</h1>
 
-          <div className="password">
-            <h4>Password</h4>
-            <input
-              type="password"
-              placeholder="Create password"
-              className="p log"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+            <div className="flex items-center gap-3">
+              <h4 className="font-medium">Username</h4>
+              <input
+                type="text"
+                placeholder="Create username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="h-[30px] rounded-xl px-3 outline-none"
+              />
+            </div>
 
-          <button type="submit" className="submit" disabled={loading}>
-            {loading ? 'Signing Up...' : 'Sign Up'} {/* Disable button during API call */}
-          </button>
+            <div className="flex items-center gap-3">
+              <h4 className="font-medium">Password</h4>
+              <input
+                type="password"
+                placeholder="Create password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="h-[30px] rounded-xl px-3 outline-none"
+              />
+            </div>
 
-          <p>
-            Already have an account?{" "}
-            <a
-              href="#!" // CORRECTED: Fixes accessibility warning
-              onClick={(e) => {
-                e.preventDefault(); // Prevent default anchor navigation
-                setIsLogin(true);
-                resetForm();
-              }}
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-6 w-[100px] h-[30px] rounded-xl
+                bg-white hover:bg-primary hover:text-white
+                transition disabled:opacity-60"
             >
-              Log In
-            </a>
-          </p>
-        </form>
-      )}
+              {loading ? "Signing Up..." : "Sign Up"}
+            </button>
+
+            <p className="text-sm">
+              Already have an account?{" "}
+              <a
+                href="#!"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsLogin(true);
+                  resetForm();
+                }}
+                className="text-blue-700 hover:underline"
+              >
+                Log In
+              </a>
+            </p>
+          </form>
+        )}
+      </div>
     </div>
   );
 }

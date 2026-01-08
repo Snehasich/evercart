@@ -10,7 +10,9 @@ const InsideItems = () => {
 
   useEffect(() => {
     if (!product) return;
-    const exists = getCart().some(item => item.productId === product.id);
+    const exists = getCart().some(
+      item => item.productId === product.id
+    );
     setIsInCart(exists);
   }, [product]);
 
@@ -18,33 +20,64 @@ const InsideItems = () => {
     const cart = getCart();
 
     if (isInCart) {
-      const updated = cart.filter(item => item.productId !== product.id);
-      saveCart(updated);
+      saveCart(cart.filter(item => item.productId !== product.id));
       setIsInCart(false);
     } else {
-      const newItem = {
-        productId: product.id,
-        name: product.name,
-        price: product.price, // number field
-        prices: product.prices,
-        img: product.img,
-        quantity: 1
-      };
-      saveCart([...cart, newItem]);
+      saveCart([
+        ...cart,
+        {
+          productId: product.id,
+          name: product.name,
+          price: product.price,
+          prices: product.prices,
+          img: product.img,
+          quantity: 1,
+        },
+      ]);
       setIsInCart(true);
     }
   };
 
-  if (!product) return <h2>Product Not Found</h2>;
+  if (!product)
+    return (
+      <h2 className="text-center text-2xl mt-10">
+        Product Not Found
+      </h2>
+    );
 
   return (
-    <div className="inside_items">
-      <img src={product.img} alt={product.name} />
-      <div className="i">
-        <p>{product.name}</p>
-        <h6>{product.price}</h6>
-        <button onClick={handleToggleCart}>
-          {isInCart ? "Added to Cart" : "Cart"}
+    <div
+      className="w-screen h-screen flex justify-center items-center gap-20
+        bg-white dark:bg-[#121212] p-5
+        md:flex-col md:h-auto md:text-center"
+    >
+      <img
+        src={product.img}
+        alt={product.name}
+        className="w-[450px] h-[80vh] object-contain
+          md:w-[300px] md:h-auto"
+      />
+
+      <div>
+        <p className="text-[40px] font-semibold text-[#222] dark:text-white">
+          {product.name}
+        </p>
+
+        <h6 className="text-[32px] text-green-600 my-5">
+          {product.price}
+        </h6>
+
+        <button
+          onClick={handleToggleCart}
+          className={`px-7 py-3 rounded-xl text-xl font-bold
+            text-white transition
+            ${
+              isInCart
+                ? "bg-green-600 hover:bg-green-700"
+                : "bg-accent hover:bg-yellow-600"
+            }`}
+        >
+          {isInCart ? "Added to Cart" : "Add to Cart"}
         </button>
       </div>
     </div>

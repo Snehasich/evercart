@@ -9,7 +9,6 @@ const Timer = () => {
   useEffect(() => {
     let endTime = localStorage.getItem("orderEndTime");
 
-    // 🟡 No orderEndTime means no timer to show
     if (!endTime) {
       setIsActive(false);
       return;
@@ -23,12 +22,10 @@ const Timer = () => {
       const diff = Math.floor((endTime - now) / 1000);
 
       if (diff <= 0) {
-        // ✅ Timer expired
-        // clearInterval(interval);
         localStorage.removeItem("orderEndTime");
         setIsActive(false);
         setRemainingTime(0);
-        navigate("/"); // optional redirect
+        navigate("/");
       } else {
         setRemainingTime(diff);
       }
@@ -39,7 +36,6 @@ const Timer = () => {
     return () => clearInterval(interval);
   }, [navigate]);
 
-  // 🟢 Don’t render anything if timer isn’t active
   if (!isActive) return null;
 
   const minutes = Math.floor(remainingTime / 60);
@@ -48,34 +44,19 @@ const Timer = () => {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        bottom: "20px",
-        right: "20px",
-        width: "100px",
-        height: "100px",
-        backgroundColor: "#1a1a1a",
-        color: "#fff",
-        borderRadius: "12px",
-        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "'Inter', sans-serif",
-        zIndex: 9999,
-      }}
       title={`Delivery to: ${address}`}
+      className="
+        fixed bottom-5 right-5
+        w-[100px] h-[100px]
+        bg-[#1a1a1a] text-white
+        rounded-xl shadow-lg
+        flex flex-col items-center justify-center
+        z-[9999]
+      "
     >
-      <div style={{ fontSize: "0.9rem", color: "#ccc" }}>ETA</div>
-      <div
-        style={{
-          fontSize: "1.4rem",
-          fontWeight: "bold",
-          color: "#ffb703",
-          marginTop: "4px",
-        }}
-      >
+      <div className="text-sm text-gray-400">ETA</div>
+
+      <div className="text-xl font-bold text-[#ffb703] mt-1">
         {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </div>
     </div>

@@ -1,10 +1,9 @@
-// here it is used to protect the any route when user is not logged in
 import { Navigate } from "react-router-dom";
 import { useRef } from "react";
 
 function ProtectedRoute({ children }) {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const alertedRef = useRef(false); // prevent double alert
+  const alertedRef = useRef(false);
 
   if (!isLoggedIn) {
     if (!alertedRef.current) {

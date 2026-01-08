@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCart, saveCart } from "./cartStorage";
-import "./checkout.css";
 
 const Checkout = () => {
   const navigate = useNavigate();
 
-  // 🛒 Cart & form state
   const [cartItems, setCartItems] = useState([]);
   const [address, setAddress] = useState({
     name: "",
@@ -17,25 +15,20 @@ const Checkout = () => {
   });
   const [paymentMethod, setPaymentMethod] = useState("COD");
 
-  // 🔄 Load cart from localStorage
   useEffect(() => {
     const items = getCart();
     setCartItems(items || []);
   }, []);
 
-  // 🧮 Clean price helper
   const cleanPrice = (price) =>
     Number(String(price).replace(/[^\d.-]/g, "")) || 0;
 
-  // 💰 Calculate total price
   const total = cartItems.reduce(
     (acc, item) => acc + cleanPrice(item.price) * item.quantity,
     0
   );
 
-  // ✅ Handle placing the order
   const handlePlaceOrder = () => {
-    // Check for required address fields
     if (
       !address.name ||
       !address.phone ||
@@ -56,130 +49,138 @@ const Checkout = () => {
       `✅ Order placed successfully!\nPayment Method: ${paymentMethod}\nTotal: ₹${total.toLocaleString()}`
     );
 
-    // ✅ Save address for Timer.jsx to display
     localStorage.setItem(
       "address",
       `${address.street}, ${address.city}, ${address.pincode}`
     );
 
-    // ✅ Start a 15-minute persistent timer (in milliseconds)
-    const endTime = Date.now() + 15 * 60 * 1000; // 15 minutes
+    const endTime = Date.now() + 15 * 60 * 1000;
     localStorage.setItem("orderEndTime", endTime);
 
-    // ✅ Clear the cart
     saveCart([]);
     setCartItems([]);
 
-    // ✅ Navigate back to cart (Timer will appear automatically)
     navigate("/cart");
   };
 
   return (
-    <div className="checkout-container">
-      <h1>Checkout</h1>
+    <div className="max-w-[750px] mx-auto my-8 p-8 bg-white dark:bg-[#1e1e1e]
+      rounded-xl shadow-[0_2px_15px_rgba(0,0,0,0.08)] text-[#222] dark:text-white">
 
-      {/* 🧾 Order Summary */}
-      <div className="checkout-section">
-        <h2>Order Summary</h2>
+      <h1 className="text-center text-2xl font-bold mb-6">
+        Checkout
+      </h1>
+
+      {/* Order Summary */}
+      <div className="border border-gray-200 dark:border-gray-700
+        rounded-xl p-6 mb-6 bg-gray-50 dark:bg-[#2a2a2a]">
+
+        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
         {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
+          <p className="text-gray-600 dark:text-gray-300">
+            Your cart is empty.
+          </p>
         ) : (
           cartItems.map((item) => (
-            <div key={item.productId} className="checkout-item">
+            <div
+              key={item.productId}
+              className="flex justify-between mb-3">
+
               <div>
-                <h3>{item.name}</h3>
-                <p>Qty: {item.quantity}</p>
+                <h3 className="font-semibold">{item.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  Qty: {item.quantity}
+                </p>
               </div>
-              <p>₹{cleanPrice(item.price) * item.quantity}</p>
+
+              <p className="font-medium">
+                ₹{cleanPrice(item.price) * item.quantity}
+              </p>
             </div>
           ))
         )}
 
-        <hr />
-        <h3 className="total">Total: ₹{total.toLocaleString()}</h3>
+        <hr className="my-4 border-gray-300 dark:border-gray-600" />
+
+        <h3 className="text-right font-bold text-lg">
+          Total: ₹{total.toLocaleString()}
+        </h3>
       </div>
 
-      {/* 🏠 Address Section */}
-      <div className="checkout-section">
-        <h2>Delivery Address</h2>
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={address.name}
-          onChange={(e) => setAddress({ ...address, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Phone Number"
-          value={address.phone}
-          onChange={(e) => setAddress({ ...address, phone: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Street Address"
-          value={address.street}
-          onChange={(e) => setAddress({ ...address, street: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="City"
-          value={address.city}
-          onChange={(e) => setAddress({ ...address, city: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Pincode"
-          value={address.pincode}
-          onChange={(e) => setAddress({ ...address, pincode: e.target.value })}
-        />
+      {/* Address */}
+      <div className="border border-gray-200 dark:border-gray-700
+        rounded-xl p-6 mb-6 bg-gray-50 dark:bg-[#2a2a2a]">
+
+        <h2 className="text-xl font-semibold mb-4">
+          Delivery Address
+        </h2>
+
+        {["Full Name", "Phone Number", "Street Address", "City", "Pincode"].map(
+          (placeholder, index) => {
+            const keys = ["name", "phone", "street", "city", "pincode"];
+            return (
+              <input
+                key={index}
+                type="text"
+                placeholder={placeholder}
+                value={address[keys[index]]}
+                onChange={(e) =>
+                  setAddress({ ...address, [keys[index]]: e.target.value })
+                }
+                className="w-full p-3 mb-3 border border-gray-300 dark:border-gray-600
+                  rounded-lg bg-white dark:bg-[#1e1e1e]
+                  focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20
+                  outline-none"
+              />
+            );
+          }
+        )}
       </div>
 
-      {/* 💳 Payment Section */}
-      <div className="checkout-section">
-        <h2>Payment Method</h2>
+      {/* Payment */}
+      <div className="border border-gray-200 dark:border-gray-700
+        rounded-xl p-6 mb-6 bg-gray-50 dark:bg-[#2a2a2a]">
 
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="COD"
-            checked={paymentMethod === "COD"}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          />
-          Cash on Delivery
-        </label>
+        <h2 className="text-xl font-semibold mb-4">
+          Payment Method
+        </h2>
 
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="UPI"
-            checked={paymentMethod === "UPI"}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          />
-          UPI Payment
-        </label>
+        {["COD", "UPI", "Card"].map(method => (
+          <label
+            key={method}
+            className="flex items-center gap-2 mb-2 cursor-pointer">
 
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="Card"
-            checked={paymentMethod === "Card"}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          />
-          Credit / Debit Card
-        </label>
+            <input
+              type="radio"
+              name="payment"
+              value={method}
+              checked={paymentMethod === method}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            />
+            {method === "COD"
+              ? "Cash on Delivery"
+              : method === "UPI"
+              ? "UPI Payment"
+              : "Credit / Debit Card"}
+          </label>
+        ))}
       </div>
 
-      {/* 🟢 Buttons */}
-      <div className="checkout-actions">
-        <button className="back-btn" onClick={() => navigate("/cart")}>
+      {/* Actions */}
+      <div className="flex justify-between gap-4 mt-6 max-sm:flex-col">
+        <button
+          onClick={() => navigate("/cart")}
+          className="flex-1 bg-gray-200 dark:bg-gray-700
+            hover:bg-gray-300 dark:hover:bg-gray-600
+            py-3 rounded-lg font-medium transition">
           ← Back to Cart
         </button>
 
-        <button className="place-order-btn" onClick={handlePlaceOrder}>
+        <button
+          onClick={handlePlaceOrder}
+          className="flex-1 bg-blue-600 hover:bg-blue-800
+            text-white py-3 rounded-lg font-semibold transition">
           Place Order
         </button>
       </div>
